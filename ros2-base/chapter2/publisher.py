@@ -16,7 +16,8 @@ class MinimalPublisher(Node):
         msg = Float32()
         msg.data = self.getCPUTemp()
         self.publisher_.publish(msg)
-        self.get_logger().info('Publishing CPU temp: "%f"' % msg.data)
+        self.get_logger().info(f'Publishing CPU temp: {msg.data}')
+        
 
     def getCPUTemp(self):
         data = open('/sys/class/thermal/thermal_zone0/temp', 'r').read()
@@ -24,8 +25,8 @@ class MinimalPublisher(Node):
 
 
 def main(args=None):
+    
     rclpy.init(args=args)
-
     minimal_publisher = MinimalPublisher()
 
     try:
