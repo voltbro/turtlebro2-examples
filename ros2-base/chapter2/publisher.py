@@ -8,14 +8,14 @@ class MinimalPublisher(Node):
 
     def __init__(self):
         super().__init__('minimal_publisher')
-        self.publisher_ = self.create_publisher(Float32, 'temp', 10)
+        self.publisher = self.create_publisher(Float32, 'temp', 10)
         timer_period = 0.5  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
 
     def timer_callback(self):
         msg = Float32()
         msg.data = self.getCPUTemp()
-        self.publisher_.publish(msg)
+        self.publisher.publish(msg)
         self.get_logger().info(f'Publishing CPU temp: {msg.data}')
         
 
